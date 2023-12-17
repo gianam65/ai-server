@@ -151,8 +151,6 @@ def get_answers(list_answers):
 def calculate_score(actual_result, default_result):
     correct_count = 0
     total_questions = len(default_result)
-    print("actual_result", actual_result)
-    print("default_result", default_result)
 
     for question, actual_answers in actual_result.items():
         default_answers = default_result[question] if question in default_result else []
