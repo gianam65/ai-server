@@ -25,25 +25,17 @@ def get_x_ver1(s):
 
 
 def crop_image(img):
-    # convert image from BGR to GRAY to apply canny edge detection algorithm
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-    # remove noise by blur image
     blurred = cv2.GaussianBlur(gray_img, (5, 5), 0)
-
-    # apply canny edge detection algorithm
     img_canny = cv2.Canny(blurred, 100, 200)
-
-    # find contours
+    
     cnts = cv2.findContours(img_canny.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     cnts = imutils.grab_contours(cnts)
 
     ans_blocks = []
     x_old, y_old, w_old, h_old = 0, 0, 0, 0
 
-    # ensure that at least one contour was found
     if len(cnts) > 0:
-        # sort the contours according to their size in descending order
         cnts = sorted(cnts, key=get_x_ver1)
 
         # loop over the sorted contours
@@ -80,18 +72,12 @@ def crop_image(img):
 
 
 def process_ans_blocks(ans_blocks):
-    """
-        this function process 2 block answer box and return a list answer has len of 200 bubble choices
-        :param ans_blocks: a list which include 2 element, each element has the format of [image, [x, y, w, h]]
-    """
     list_answers = []
 
-    # Loop over each block ans in
     for ans_block in ans_blocks:
         ans_block_img = np.array(ans_block[0])
 
         offset1 = ceil(ans_block_img.shape[0] / 6)
-        # Loop over each box in answer block
         for i in range(6):
             box_img = np.array(ans_block_img[i * offset1:(i + 1) * offset1, :])
             height_box = box_img.shape[0]
@@ -99,7 +85,6 @@ def process_ans_blocks(ans_blocks):
             box_img = box_img[14:height_box - 14, :]
             offset2 = ceil(box_img.shape[0] / 5)
 
-            # loop over each line in a box
             for j in range(5):
                 list_answers.append(box_img[j * offset2:(j + 1) * offset2, :])
 
@@ -159,8 +144,6 @@ def calculate_score(actual_result, default_result):
         default_answers = list(map(str, default_answers))
 
         if actual_answers == default_answers:
-            print("actual_answers", actual_answers)
-            print("default_answers", default_answers)
             correct_count += 1
 
     score = (correct_count / total_questions) * 100
@@ -204,7 +187,7 @@ def get_md(img):
 
 
 # if __name__ == '__main__':
-#     img = cv2.imread('a1.jpg')
+#     img = cv2.imread('test1.jpeg')
 #     list_ans_boxes = crop_image(img)
 #     list_ans = process_ans_blocks(list_ans_boxes)
 #     list_ans = process_list_ans(list_ans)

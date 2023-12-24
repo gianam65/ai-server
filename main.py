@@ -77,17 +77,17 @@ class CNN_Model(object):
     def train(self):
         images, labels = self.load_data()
 
-        # build model
         self.build_model(rt=False)
 
-        # compile
         self.model.compile(loss="categorical_crossentropy", optimizer=optimizers.Adam(1e-3), metrics=['acc'])
 
-        # reduce learning rate
         reduce_lr = ReduceLROnPlateau(monitor='val_acc', factor=0.2, patience=5, verbose=1, )
 
-        # Model Checkpoint
-        cpt_save = ModelCheckpoint('./weight.h5', save_best_only=True, monitor='val_acc', mode='max')
+        cpt_save = ModelCheckpoint('./weight_test.h5', save_best_only=True, monitor='val_acc', mode='max')
 
-        self.model.fit(images, labels, callbacks=[cpt_save, reduce_lr], verbose=1, epochs=10, validation_split=0.15, batch_size=32,
+        self.model.fit(images, labels, callbacks=[cpt_save, reduce_lr], verbose=1, epochs=20, validation_split=0.15, batch_size=32,
                        shuffle=True)
+
+# if __name__ == "__main__":
+#     cnn_model = CNN_Model()  
+#     cnn_model.train()

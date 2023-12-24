@@ -47,7 +47,7 @@ class answer:
 
             sorted_ans_blocks = sorted(ans_blocks, key=self.get_x)
             return sorted_ans_blocks
-
+        
     def divide_ans_blocks(self,ans_blocks):
         list_answers = []
         for ans_block in ans_blocks:
@@ -74,6 +74,7 @@ class answer:
                     bubble_choice = bubble_choice.reshape((28, 28, 1))
                     list_choices.append(bubble_choice)
         return list_choices
+    
     def map_answer(self,idx):
         if idx % 4 == 0:
             answer_circle = "A"
@@ -108,9 +109,10 @@ def get_final_answer(img):
     return result
 
 # def main():
-#     img = cv2.imread('a1.jpg')
+#     img = cv2.imread('./test_input/test1.jpeg')
+#     # img = cv2.imread('hihihi.png')
 #     img = cv2.resize(img,(1100,1500))
-#     model  = tf.keras.models.load_model('weight.h5')
+#     model = tf.keras.models.load_model('weight.h5')
 #     crop =  answer()
 #     ans_blocks = crop.crop_image(img)
 #     list_answer = crop.divide_ans_blocks(ans_blocks)

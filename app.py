@@ -45,7 +45,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-        model = tf.keras.models.load_model('weight.h5')
+        model = tf.keras.models.load_model('weight_test.h5')
 
         return model
 
@@ -59,7 +59,7 @@ def process_image():
 
     default_result = json.loads(request.form['default_result'])
 
-    model  = tf.keras.models.load_model('weight.h5')
+    model  = tf.keras.models.load_model('weight_test.h5')
     crop = answer()  
     ans_blocks = crop.crop_image(img)
     list_ans = crop.divide_ans_blocks(ans_blocks)
