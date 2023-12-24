@@ -5,6 +5,7 @@ import cv2
 from math import ceil
 from collections import defaultdict
 import matplotlib.pyplot as plt
+import subprocess
 
 class answer:
     def get_x_ver1(self,s):
@@ -13,7 +14,13 @@ class answer:
 
     def get_x(self,s):
           return s[1][0]
+    
     def pre_processing_img(self,img):
+        # script_path = "pyimgscan.py"
+        # image_path = "./test_input/hihihii.jpeg"
+        # command = ["python3", script_path, "-i", image_path]
+        # subprocess.run(command)
+        # corrected_image = cv2.imread("corrected.png")
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         blurred = cv2.GaussianBlur(gray_img, (5, 5), 0)
         img_canny = cv2.Canny(blurred, 100, 200)
@@ -21,7 +28,7 @@ class answer:
         cnts = cv2.findContours(img_canny.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cnts = imutils.grab_contours(cnts)
         return cnts,gray_img
-    
+
     def crop_image(self,img):
         cnts,gray_img = self.pre_processing_img(img)
         ans_blocks = []
@@ -59,7 +66,7 @@ class answer:
                     box_img = box_img[14:height_box-14, :]
                     offset2 = ceil(box_img.shape[0] / 5)
                     for j in range(5):
-                          list_answers.append(box_img[j * offset2:(j + 1) * offset2, :])
+                        list_answers.append(box_img[j * offset2:(j + 1) * offset2, :])
         return list_answers
     
     def list_ans(self,list_answers):
@@ -108,20 +115,24 @@ def get_final_answer(img):
     result = crop.get_answers(list_answer,model)
     return result
 
-# def main():
-#     img = cv2.imread('./test_input/test1.jpeg')
-#     # img = cv2.imread('hihihi.png')
-#     img = cv2.resize(img,(1100,1500))
-#     model = tf.keras.models.load_model('weight.h5')
-#     crop =  answer()
-#     ans_blocks = crop.crop_image(img)
-#     list_answer = crop.divide_ans_blocks(ans_blocks)
-#     list_answer = crop.list_ans(list_answer)
-#     result = crop.get_answers(list_answer,model)
-#     print("result", result)
-#     return result
+def main():
+    # img = cv2.imread('./test_input/test1.jpeg')
+    img = cv2.imread('./test_input/hihihi.png')
+    # img = cv2.imread('./test_input/asd.png')
+    img = cv2.resize(img,(1100,1500))
+    # cv2.imshow("img", img)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    model = tf.keras.models.load_model('weight.h5')
+    crop =  answer()
+    ans_blocks = crop.crop_image(img)
+    list_answer = crop.divide_ans_blocks(ans_blocks)
+    list_answer = crop.list_ans(list_answer)
+    result = crop.get_answers(list_answer,model)
+    print("result", result)
+    return result
 
-# main()
+main()
 
 
 
