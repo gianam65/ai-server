@@ -187,7 +187,7 @@ def get_md(img):
 
 
 # if __name__ == '__main__':
-#     img = cv2.imread('test1.jpeg')
+#     img = cv2.imread('./test_input/a1.jpg')
 #     list_ans_boxes = crop_image(img)
 #     list_ans = process_ans_blocks(list_ans_boxes)
 #     list_ans = process_list_ans(list_ans)

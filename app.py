@@ -51,6 +51,10 @@ def create_app():
 
 model = create_app()
 
+@app.route('/')
+def home():
+    return 'TEST API'
+
 @app.route('/process_image', methods=['POST'])
 def process_image():
     image_file = request.files['image']
