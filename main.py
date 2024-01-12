@@ -4,7 +4,7 @@ from tensorflow.keras import optimizers
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 import matplotlib.pyplot as plt
-from sklearn.metrics import roc_curve, auc
+# from sklearn.metrics import roc_curve, auc
 
 from pathlib import Path
 import cv2
@@ -75,22 +75,22 @@ class CNN_Model(object):
 
         return images, labels
 
-    def plot_roc_auc(self, test_images, test_labels):
-        predictions = self.model.predict(test_images)
+    # def plot_roc_auc(self, test_images, test_labels):
+    #     predictions = self.model.predict(test_images)
         
-        # Tính FPR, TPR, và AUC
-        fpr, tpr, _ = roc_curve(test_labels[:, 1], predictions[:, 1])
-        roc_auc = auc(fpr, tpr)
+    #     # Tính FPR, TPR, và AUC
+    #     fpr, tpr, _ = roc_curve(test_labels[:, 1], predictions[:, 1])
+    #     roc_auc = auc(fpr, tpr)
 
-        # Hiển thị đồ thị ROC-AUC
-        plt.figure(figsize=(8, 8))
-        plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = {:.2f})'.format(roc_auc))
-        plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--', label='Random')
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title('ROC-AUC Curve')
-        plt.legend()
-        plt.show()
+    #     # Hiển thị đồ thị ROC-AUC
+    #     plt.figure(figsize=(8, 8))
+    #     plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = {:.2f})'.format(roc_auc))
+    #     plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--', label='Random')
+    #     plt.xlabel('False Positive Rate')
+    #     plt.ylabel('True Positive Rate')
+    #     plt.title('ROC-AUC Curve')
+    #     plt.legend()
+    #     plt.show()
 
     def train(self):
         images, labels = self.load_data()
