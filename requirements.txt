@@ -71,7 +71,7 @@ scikit-learn==1.2.0
 scipy==1.9.3
 seaborn==0.12.2
 six==1.16.0
-scikit-learn==0.0.post5
+# sklearn==0.0.post5
 SQLAlchemy==2.0.23
 statsmodels==0.13.5
 tenacity==8.2.2
