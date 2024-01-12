@@ -31,11 +31,11 @@ class crop_image:
               check_xy_min = x * y - x_old * y_old
               check_xy_max = (x + w) * (y + h) - (x_old + w_old) * (y_old + h_old)
               if check_xy_min > 70000 and check_xy_max > 110000:
-                print(check_xy_min,check_xy_max)
                 info_blocks.append((gray_img[y:y + h, x:x + w],[x,y,w,h]))
                 x_old,y_old,w_old,h_old= x,y,w,h
           
         return info_blocks
+    
     def crop_image_md(self,img):
         cnts,gray_img = self.pre_processing_input(img)
         info_blocks = []
@@ -48,7 +48,6 @@ class crop_image:
               check_xy_min = x * y - x_old * y_old
               check_xy_max = (x + w) * (y + h) - (x_old + w_old) * (y_old + h_old)
               if check_xy_min > 90000 and check_xy_max > 131000:
-                print(check_xy_min,check_xy_max)
                 info_blocks.append((gray_img[y:y + h, x:x + w],[x,y,w,h]))
                 x_old,y_old,w_old,h_old= x,y,w,h
 

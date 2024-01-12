@@ -43,6 +43,9 @@ class answer:
                     check_xy_max = (x_curr + w_curr) * (y_curr + h_curr) - (x_old + w_old) * (y_old + h_old)
 
                     if len(ans_blocks) == 0:
+                        # cv2.imshow("test", gray_img[y_curr:y_curr + h_curr, x_curr:x_curr + w_curr])
+                        # cv2.waitKey(0)
+                        # cv2.destroyAllWindows()
                         ans_blocks.append(
                             (gray_img[y_curr:y_curr + h_curr, x_curr:x_curr + w_curr],[x_curr,y_curr,w_curr,h_curr]))
                         x_old,y_old,w_old,h_old = x_curr,y_curr,w_curr,h_curr
@@ -92,6 +95,7 @@ class answer:
         else:
             answer_circle = "D"
         return answer_circle
+    
     def get_answers(self,list_answers,model):
         results = defaultdict(list)
         list_answers = np.array(list_answers)
@@ -115,24 +119,21 @@ def get_final_answer(img):
     result = crop.get_answers(list_answer,model)
     return result
 
-def main():
-    # img = cv2.imread('./test_input/test1.jpeg')
-    img = cv2.imread('./test_input/hihihi.png')
-    # img = cv2.imread('./test_input/asd.png')
-    img = cv2.resize(img,(1100,1500))
-    # cv2.imshow("img", img)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-    model = tf.keras.models.load_model('weight.h5')
-    crop =  answer()
-    ans_blocks = crop.crop_image(img)
-    list_answer = crop.divide_ans_blocks(ans_blocks)
-    list_answer = crop.list_ans(list_answer)
-    result = crop.get_answers(list_answer,model)
-    print("result", result)
-    return result
+# def main():
+#     # img = cv2.imread('./test_input/1.jpeg')
+#     img = cv2.imread('./test_input/input_1.jpeg')
+#     # img = cv2.imread('./test_input/asd.png')
+#     img = cv2.resize(img,(1100,1500))
+#     model = tf.keras.models.load_model('weight.h5')
+#     crop =  answer()
+#     ans_blocks = crop.crop_image(img)
+#     list_answer = crop.divide_ans_blocks(ans_blocks)
+#     list_answer = crop.list_ans(list_answer)
+#     result = crop.get_answers(list_answer,model)
+#     print("result", result)
+#     return result
 
-main()
+# main()
 
 
 
