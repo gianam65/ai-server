@@ -5,7 +5,7 @@ import cv2
 from math import ceil
 from collections import defaultdict
 import matplotlib.pyplot as plt
-import subprocess
+# import subprocess
 
 class answer:
     def get_x_ver1(self,s):
