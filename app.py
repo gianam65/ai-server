@@ -123,5 +123,5 @@ def save_to_db(response):
     db.session.add(new_answer)
     db.session.commit()
 
-# if __name__ == '__main__':
-#     app.run(port=8000, debug=True)
+if __name__ == '__main__':
+    app.run(port=8000, debug=True)
