@@ -24,6 +24,8 @@ greenlet==3.0.2
 grpcio==1.54.2
 h5py==3.8.0
 idna==3.4
+image-quality==1.2.7
+imageio==2.33.1
 imutils==0.5.4
 itsdangerous==2.1.2
 jax==0.4.10
@@ -33,11 +35,15 @@ keras==2.15.0
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 kiwisolver==1.4.4
+lazy_loader==0.3
 libclang==16.0.0
+libsvm==3.23.0.4
+lsd==0.3.3
 Markdown==3.4.3
 MarkupSafe==2.1.2
 matplotlib==3.7.1
 ml-dtypes==0.2.0
+networkx==3.2.1
 numpy==1.23.5
 oauthlib==3.2.2
 opencv-python==4.8.1.78
@@ -52,6 +58,8 @@ protobuf==4.21.12
 pyasn1==0.5.0
 pyasn1-modules==0.3.0
 pycodestyle==2.10.0
+pydot==2.0.0
+pylsd==0.0.2
 pyparsing==3.0.9
 PyQt3D==5.15.6
 PyQt5==5.15.10
@@ -61,17 +69,22 @@ PyQtDataVisualization==5.15.5
 PyQtNetworkAuth==5.15.5
 PyQtPurchasing==5.15.5
 PyQtWebEngine==5.15.6
+PySide6==6.6.1
+PySide6-Addons==6.6.1
+PySide6-Essentials==6.6.1
 python-dateutil==2.8.2
 pytz==2022.7
 PyYAML==6.0
 requests==2.31.0
 requests-oauthlib==1.3.1
 rsa==4.9
+scikit-image==0.22.0
 scikit-learn==1.2.0
 scipy==1.9.3
 seaborn==0.12.2
+shiboken6==6.6.1
 six==1.16.0
-# sklearn==0.0.post5
+sklearn==0.0.post5
 SQLAlchemy==2.0.23
 statsmodels==0.13.5
 tenacity==8.2.2
@@ -82,6 +95,7 @@ tensorflow-estimator==2.15.0
 tensorflow-io-gcs-filesystem==0.32.0
 termcolor==2.3.0
 threadpoolctl==3.1.0
+tifffile==2023.12.9
 typing_extensions==4.6.2
 urllib3==1.26.16
 virtualenv==20.25.0
