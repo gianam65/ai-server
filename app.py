@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from process_img import crop_image, process_ans_blocks, process_list_ans, get_answers, get_sbd, get_md, calculate_score
+from process_img import get_sbd, get_md, calculate_score
 from main import CNN_Model
 from flask_sqlalchemy import SQLAlchemy
 import cv2
@@ -9,6 +9,7 @@ import json
 from json import JSONEncoder
 from detect_ans import answer
 import tensorflow as tf
+import subprocess
 
 app = Flask(__name__)
 CORS(app)
@@ -53,14 +54,27 @@ model = create_app()
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
+    mark_by_camera = request.form.get('mark_by_camera')
+    mark_by_camera = bool(mark_by_camera) if mark_by_camera else False
     image_file = request.files['image']
     img = cv2.imdecode(np.frombuffer(image_file.read(), np.uint8), cv2.IMREAD_COLOR)
     img = cv2.resize(img,(1100,1500))
 
     default_result = json.loads(request.form['default_result'])
-    mark_by_camera = request.form.get('mark_by_camera')
-    mark_by_camera = bool(mark_by_camera) if mark_by_camera else False
-    print("mark_by_camera", mark_by_camera)
+    
+    if mark_by_camera:
+        saved_img_path = "./test_input/user_uploaded_image.jpeg"
+        cv2.imwrite(saved_img_path, img)
+        script_path = "pyimgscan.py"
+        image_path = saved_img_path
+        command = ["python3", script_path, "-i", image_path]
+        try:
+            result = subprocess.run(command, check=True, capture_output=True, text=True)
+            print("Command output:", result.stdout)
+        except subprocess.CalledProcessError as e:
+            return jsonify({'success': False, 'error_message': 'Ảnh đầu vào quá mờ hoặc không đủ độ sáng'})
+
+        img = cv2.imread("corrected.png")
 
     model  = tf.keras.models.load_model('weight_test.h5')
     crop = answer()  
@@ -75,6 +89,7 @@ def process_image():
     md = get_md(img)
 
     response = {
+        'success': True,
         'answers': answers,
         'score': score,
         'sbd': ''.join(map(str, sbd)),

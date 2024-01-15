@@ -15,12 +15,13 @@ class answer:
     def get_x(self,s):
           return s[1][0]
     
-    def pre_processing_img(self,img):
+    def pre_processing_img(self,img, mark_by_camera = False):
         # script_path = "pyimgscan.py"
         # image_path = "./test_input/hihihii.jpeg"
         # command = ["python3", script_path, "-i", image_path]
         # subprocess.run(command)
         # corrected_image = cv2.imread("corrected.png")
+        
         gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         blurred = cv2.GaussianBlur(gray_img, (5, 5), 0)
         img_canny = cv2.Canny(blurred, 100, 200)
