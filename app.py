@@ -51,10 +51,6 @@ def create_app():
 
 model = create_app()
 
-@app.route('/')
-def home():
-    return 'TEST API'
-
 @app.route('/process_image', methods=['POST'])
 def process_image():
     image_file = request.files['image']
@@ -62,6 +58,9 @@ def process_image():
     img = cv2.resize(img,(1100,1500))
 
     default_result = json.loads(request.form['default_result'])
+    mark_by_camera = request.form.get('mark_by_camera')
+    mark_by_camera = bool(mark_by_camera) if mark_by_camera else False
+    print("mark_by_camera", mark_by_camera)
 
     model  = tf.keras.models.load_model('weight_test.h5')
     crop = answer()  
@@ -123,5 +122,5 @@ def save_to_db(response):
     db.session.add(new_answer)
     db.session.commit()
 
-# if __name__ == '__main__':
-#     app.run(port=8000, debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000, debug=True, ssl_context=('./cert.pem', './key.pem'))
