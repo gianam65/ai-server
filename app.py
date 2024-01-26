@@ -14,7 +14,6 @@ import subprocess
 app = Flask(__name__)
 CORS(app)
 
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///answers.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -78,9 +77,9 @@ def process_image():
 
     model  = tf.keras.models.load_model('weight_test.h5')
     crop = answer()  
-    ans_blocks = crop.crop_image(img)
+    ans_blocks = crop.crop_image(img, mark_by_camera)
     list_ans = crop.divide_ans_blocks(ans_blocks)
-    list_ans = crop.list_ans(list_ans)
+    list_ans = crop.list_ans(list_ans, mark_by_camera)
     answers = crop.get_answers(list_ans, model)
     need_re_mark = any(len(values) > 1 for values in answers.values())
 
