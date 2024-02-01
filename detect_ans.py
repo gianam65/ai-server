@@ -211,7 +211,7 @@ def get_final_answer(img):
 
 # def main():
 #     # img = cv2.imread('./test_input/input_1.jpeg')
-#     img = cv2.imread('./test_input/asd.png')
+#     img = cv2.imread('corrected.png')
 #     img = cv2.resize(img,(1100,1500))
 #     model = tf.keras.models.load_model('weight.h5')
 #     crop =  answer()
