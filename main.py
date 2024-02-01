@@ -104,32 +104,8 @@ class CNN_Model(object):
 
         cpt_save = ModelCheckpoint('./weight_test.h5', save_best_only=True, monitor='val_acc', mode='max')
 
-        self.model.fit(images, labels, callbacks=[cpt_save, reduce_lr], verbose=1, epochs=20, validation_split=0.15, batch_size=32,
+        self.model.fit(images, labels, callbacks=[cpt_save, reduce_lr], verbose=1, epochs=40, validation_split=0.2, batch_size=32,
                        shuffle=True)
-        
-        # plt.style.use("ggplot")
-        # plt.figure()
-        # plt.plot(np.arange(1, 21), H.history["loss"], label="train_loss")
-        # plt.plot(np.arange(1, 21), H.history["val_loss"], label="val_loss")
-        # plt.plot(np.arange(1, 21), H.history["acc"], label="train_acc")
-        # plt.plot(np.arange(1, 21), H.history["val_acc"], label="val_acc")
-        # plt.title("Training Loss and Acc on CIFAR-10")
-        # plt.xlabel("Epoch #")
-        # plt.ylabel("Loss/Accuracy")
-        # plt.legend()
-        # plt.show()
-
-        # plt.plot(history.history['acc'], label='Training Accuracy')
-        # plt.plot(history.history['val_acc'], label='Validation Accuracy')
-        # plt.xlabel('Epochs')
-        # plt.ylabel('Accuracy')
-        # plt.legend()
-        # plt.show()
-        # reduce_lr = ReduceLROnPlateau(monitor='val_acc', factor=0.2, patience=5, verbose=1)
-        # cpt_save = ModelCheckpoint('./weight_test.h5', save_best_only=True, monitor='val_acc', mode='max')
-
-        # self.plot_roc_auc(images, labels)
-
 
 # if __name__ == "__main__":
 #     cnn_model = CNN_Model()  

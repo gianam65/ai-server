@@ -17,7 +17,6 @@ class crop_image:
         img_canny = cv2.Canny(blurred, 100, 200)
         cnts = cv2.findContours(img_canny.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         cnts = imutils.grab_contours(cnts)
-        mask = np.zeros(img.shape[:2], dtype="uint8")
         return cnts,img 
     def crop_image_sbd(self,img):
         cnts,gray_img = self.pre_processing_input(img)
